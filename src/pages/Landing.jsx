@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ArrowRight, Zap, Brain } from "lucide-react";
 import codingImg from "/images/3D_Coding.png"; // ✅ FIXED IMAGE IMPORT
+import { useNavigate } from "react-router-dom";
 
 const CodingIcon = () => (
   <img
@@ -11,6 +12,7 @@ const CodingIcon = () => (
     loading="lazy"
   />
 );
+
 
 const Landing = () => {
   const containerRef = useRef(null);
@@ -75,11 +77,13 @@ const Landing = () => {
     return () => ctx.revert();
   }, []);
 
+  const navigate = useNavigate();
+
   return (
     <section
-      ref={containerRef}
-      className="relative w-full min-h-[calc(100vh-80px)] flex items-center overflow-hidden bg-white py-12 lg:py-0"
-    >
+  ref={containerRef}
+  className="relative w-full min-h-[calc(100vh-80px)] flex items-center overflow-visible bg-white py-12 lg:py-0"
+>
       {/* Background Grid */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.05]"
@@ -108,17 +112,17 @@ const Landing = () => {
             </p>
 
             <div className="hero-btns flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
-              <button className="px-8 py-4 bg-slate-900 text-white rounded-xl font-bold hover:bg-slate-800 transition-all flex items-center justify-center gap-2 group">
-                Get Started
-                <ArrowRight
-                  size={18}
-                  className="group-hover:translate-x-1 transition-transform"
-                />
-              </button>
+              <button
+      onClick={() => navigate("/courses")}
+      className="px-8 py-4 bg-slate-900 text-white rounded-xl font-bold hover:bg-slate-800 transition-all flex items-center justify-center gap-2 group"
+    >
+      View Courses
+      <ArrowRight
+        size={18}
+        className="group-hover:translate-x-1 transition-transform"
+      />
+    </button>
 
-              <button className="px-8 py-4 border border-slate-200 text-slate-700 rounded-xl font-bold hover:bg-slate-50 transition-all">
-                View Courses
-              </button>
             </div>
           </div>
 

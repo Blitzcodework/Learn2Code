@@ -114,9 +114,9 @@ const Courses = () => {
 
   return (
     <section
-      ref={container}
-      className="py-20 px-6 bg-white overflow-hidden"
-    >
+  ref={container}
+  className="py-20 px-6 bg-white overflow-visible"
+>
       <div className="max-w-6xl mx-auto">
         {/* HEADER */}
         <div className="course-header text-center mb-14">

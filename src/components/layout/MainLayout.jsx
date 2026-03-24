@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import { useEffect } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
@@ -13,17 +12,19 @@ const MainLayout = () => {
   }, [pathname]);
 
   return (
-    <div className="bg-white min-h-screen flex flex-col overflow-x-hidden">
+    <div className="bg-white min-h-screen flex flex-col">
       
       {/* ✅ Fixed Navbar */}
-      <Navbar />
+      <div className="fixed top-0 left-0 w-full z-50 bg-white shadow-sm">
+        <Navbar />
+      </div>
 
-      {/* ✅ Main Content (SCROLL ENABLED) */}
-      <main className="flex-1 mt-[80px] w-full">
+      {/* ✅ Main Content */}
+      <main className="flex-1 pt-[80px] w-full">
         <Outlet />
       </main>
 
-      {/* ✅ Footer stays at bottom */}
+      {/* ✅ Footer */}
       <Footer />
     </div>
   );
