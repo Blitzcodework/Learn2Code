@@ -1,22 +1,28 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import SplitType from "split-type";
+import { useNavigate } from "react-router-dom";
 
-// ✅ logo path
 const logo = "/images/Learn2Code.png";
 
 const LogoAnimation = () => {
   const logoRef = useRef(null);
   const textRef = useRef(null);
   const containerRef = useRef(null);
+  const navigate = useNavigate(); // ✅ add this
 
   useEffect(() => {
-    // 🎯 Split text into characters
     const split = new SplitType(textRef.current, { types: "chars" });
 
-    const tl = gsap.timeline();
+    const tl = gsap.timeline({
+      onComplete: () => {
+        // ✅ redirect after animation
+        setTimeout(() => {
+          navigate("/landing");
+        }, 500);
+      },
+    });
 
-    // 🌌 Background glow effect
     tl.fromTo(
       containerRef.current,
       { background: "radial-gradient(circle, #ffffff 100%, #ffffff 100%)" },
@@ -28,7 +34,6 @@ const LogoAnimation = () => {
       }
     );
 
-    // 🔥 Logo entry (premium bounce + rotate)
     tl.fromTo(
       logoRef.current,
       {
@@ -48,7 +53,6 @@ const LogoAnimation = () => {
       "-=0.6"
     );
 
-    // ⚡ Logo micro interaction (snap)
     tl.to(logoRef.current, {
       scale: 1.05,
       duration: 0.2,
@@ -57,7 +61,6 @@ const LogoAnimation = () => {
       ease: "power1.inOut",
     });
 
-    // ✨ Text reveal (letter animation)
     tl.fromTo(
       split.chars,
       {
@@ -76,7 +79,6 @@ const LogoAnimation = () => {
       "-=0.8"
     );
 
-    // 🌊 Floating loop
     gsap.to(logoRef.current, {
       y: -12,
       duration: 2.5,
@@ -85,7 +87,6 @@ const LogoAnimation = () => {
       ease: "sine.inOut",
     });
 
-    // 💜 Glow pulse loop
     gsap.to(logoRef.current, {
       filter: "drop-shadow(0px 0px 25px rgba(139,92,246,0.5))",
       duration: 1.5,
@@ -94,14 +95,13 @@ const LogoAnimation = () => {
       ease: "sine.inOut",
     });
 
-  }, []);
+  }, [navigate]);
 
   return (
     <div
       ref={containerRef}
-      className="flex flex-col items-center justify-center h-screen transition-all duration-500"
+      className="flex flex-col items-center justify-center h-screen overflow-hidden"
     >
-      {/* Logo */}
       <img
         ref={logoRef}
         src={logo}
@@ -109,7 +109,6 @@ const LogoAnimation = () => {
         className="w-36 h-36 object-contain"
       />
 
-      {/* Text */}
       <h1
         ref={textRef}
         className="text-6xl font-extrabold mt-6 text-gray-900 tracking-wide"
