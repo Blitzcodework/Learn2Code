@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ArrowRight, Zap, Brain } from "lucide-react";
-import codingImg from "../assets/3D_Coding.png"; // ✅ FIXED IMAGE IMPORT
+import codingImg from "/images/3D_Coding.png"; // ✅ FIXED IMAGE IMPORT
 
 const CodingIcon = () => (
   <img
